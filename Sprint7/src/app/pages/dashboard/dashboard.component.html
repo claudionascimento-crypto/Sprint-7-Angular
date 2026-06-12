@@ -1,0 +1,93 @@
+<div class="dashboard-wrapper">
+
+  <h2 class="title-ford">Dashboard FORD</h2>
+
+  <div class="top-grid">
+
+    <div class="card card-dropdown">
+      <label>Veículo</label>
+
+      <select
+        [(ngModel)]="modeloSelecionado"
+        (ngModelChange)="selecionarModelo($event)"
+      >
+        <option *ngFor="let m of modelos" [value]="m">
+          {{ m }}
+        </option>
+      </select>
+    </div>
+
+    <div class="card card-info">
+      <span class="card-title">Total de Vendas</span>
+      <span class="card-number">{{ vendas }}</span>
+    </div>
+
+    <div class="card card-info">
+      <span class="card-title">Conectados</span>
+      <span class="card-number text-blue">{{ conectados }}</span>
+    </div>
+
+    <div class="card card-info">
+      <span class="card-title">Update Software</span>
+      <span class="card-number">{{ atualizados }}</span>
+    </div>
+
+  </div>
+
+  <div class="center-image-container">
+    <img
+      *ngIf="imagemCarro"
+      [src]="imagemCarro"
+      [alt]="modeloSelecionado"
+      class="car-photo"
+    />
+  </div>
+
+  <div class="table-container">
+
+    <div class="table-actions">
+      <input
+        type="text"
+        placeholder="Digite o VIN do veículo..."
+        [(ngModel)]="filtroVin"
+        (input)="filtrarTabela()"
+        class="input-search"
+      />
+    </div>
+
+    <table class="ford-table" *ngIf="mostrarTabela">
+
+      <thead>
+        <tr>
+          <th>VIN</th>
+          <th>Odômetro</th>
+          <th>Combustível</th>
+          <th>Status</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of tabelaFiltrada">
+          <td>{{ item.vin }}</td>
+          <td>{{ item.odometro }}</td>
+          <td>{{ item.combustivel }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.lat }}</td>
+          <td>{{ item.long }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+    <div
+      class="mensagem-vazia"
+      *ngIf="filtroVin && !mostrarTabela"
+    >
+      VIN não encontrado.
+    </div>
+
+  </div>
+
+</div>
