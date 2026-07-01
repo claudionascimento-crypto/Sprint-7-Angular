@@ -194,3 +194,23 @@
   font-size: 15px;
   font-weight: 600;
 }
+.top-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+/* botão logout */
+.btn-logout{
+  background: #ffffff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+

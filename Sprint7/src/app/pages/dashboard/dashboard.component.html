@@ -1,6 +1,18 @@
 <div class="dashboard-wrapper">
 
+  <div class="top-bar">
+
   <h2 class="title-ford">Dashboard FORD</h2>
+
+  <button class="btn-logout" (click)="logout()">
+    👤
+  </button>
+
+
+
+    
+
+  </div>
 
   <div class="top-grid">
 
@@ -9,12 +21,16 @@
 
       <select
         [(ngModel)]="modeloSelecionado"
-        (ngModelChange)="selecionarModelo($event)"
-      >
-        <option *ngFor="let m of modelos" [value]="m">
+        (ngModelChange)="selecionarModelo($event)">
+
+        <option
+          *ngFor="let m of modelos"
+          [value]="m">
           {{ m }}
         </option>
+
       </select>
+
     </div>
 
     <div class="card card-info">
@@ -35,27 +51,31 @@
   </div>
 
   <div class="center-image-container">
+
     <img
       *ngIf="imagemCarro"
       [src]="imagemCarro"
       [alt]="modeloSelecionado"
-      class="car-photo"
-    />
+      class="car-photo">
+
   </div>
 
   <div class="table-container">
 
     <div class="table-actions">
+
       <input
         type="text"
         placeholder="Digite o VIN do veículo..."
         [(ngModel)]="filtroVin"
         (input)="filtrarTabela()"
-        class="input-search"
-      />
+        class="input-search">
+
     </div>
 
-    <table class="ford-table" *ngIf="mostrarTabela">
+    <table
+      class="ford-table"
+      *ngIf="mostrarTabela">
 
       <thead>
         <tr>
@@ -69,23 +89,28 @@
       </thead>
 
       <tbody>
+
         <tr *ngFor="let item of tabelaFiltrada">
+
           <td>{{ item.vin }}</td>
           <td>{{ item.odometro }}</td>
           <td>{{ item.combustivel }}</td>
           <td>{{ item.status }}</td>
           <td>{{ item.lat }}</td>
           <td>{{ item.long }}</td>
+
         </tr>
+
       </tbody>
 
     </table>
 
     <div
       class="mensagem-vazia"
-      *ngIf="filtroVin && !mostrarTabela"
-    >
+      *ngIf="filtroVin && !mostrarTabela">
+
       VIN não encontrado.
+
     </div>
 
   </div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../core/services/auth.service';// 1. Importa o serviço de autenticação
 
 @Component({
   selector: 'app-login',
@@ -15,20 +16,21 @@ export class LoginComponent {
   senha = '';
   mensagem = '';
 
-  constructor(private router: Router) {}
+  // Usando o recurso "inject" do Angular moderno para trazer o router e o authService
+  private router = inject(Router);
+  private authService = inject(AuthService);
 
   login() {
-
-    if(this.usuario === 'admin' && this.senha === '1234') {
-
+    if (this.usuario === 'admin' && this.senha === '123456') {
+      
+      // 2. Salva o token fictício no localStorage antes de ir para a home
+      this.authService.login('token_fake_ford_sprint7');
+      
+      // 3. Agora o segurança (Guard) vai deixar passar!
       this.router.navigate(['/home']);
 
     } else {
-
       this.mensagem = 'Usuário ou senha inválidos';
-
     }
-
   }
-
 }
